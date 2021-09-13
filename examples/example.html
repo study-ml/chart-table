@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Chart Table</title>
+  <meta charset="utf-8">
+  <script src="../dist/charttable.min.js"></script>
+  <link rel="stylesheet" href="../dist/charttable.min.css"></link>
+  <script>
+    const mytable = charttable.table();
+
+    function getIrisData() {
+      mytable.showDataset([
+        {sepal_length: 5.1, sepal_width: 3.5, petal_length: 1.4, petal_width: 0.2, species: "Setosa"},
+        {sepal_length: 4.9, sepal_width: 3, petal_length: 1.4, petal_width: 0.2, species: "Setosa"},
+        {sepal_length: 4.7, sepal_width: 3.2, petal_length: 1.3, petal_width: 0.2, species: "Setosa"},
+        {sepal_length: 4.6, sepal_width: 3.1, petal_length: 1.5, petal_width: 0.2, species: "Setosa"},
+        {sepal_length: 5, sepal_width: 3.6, petal_length: 1.4, petal_width: 0.2, species: "Setosa"},
+        {sepal_length: 5.4, sepal_width: 3.9, petal_length: 1.7, petal_width: 0.4, species: "Setosa"},
+        {sepal_length: 4.6, sepal_width: 3.4, petal_length: 1.4, petal_width: 0.3, species: "Setosa"}
+      ]);
+    }
+
+    function getHealthData() {
+      mytable.showDataset([
+        {age: 30, year_of_operation: 65, positive_axillary_nodes: 0, survival_status: 1},
+        {age: 38, year_of_operation: 66, positive_axillary_nodes: 0, survival_status: 1},
+        {age: 42, year_of_operation: 59, positive_axillary_nodes: 0, survival_status: 2},
+        {age: 49, year_of_operation: 63, positive_axillary_nodes: 0, survival_status: 2},
+        {age: 49, year_of_operation: 61, positive_axillary_nodes: 0, survival_status: 1},
+        {age: 55, year_of_operation: 66, positive_axillary_nodes: 18, survival_status: 1},
+        {age: 56, year_of_operation: 60, positive_axillary_nodes: 0, survival_status: 1},
+        {age: 61, year_of_operation: 65, positive_axillary_nodes: 0, survival_status: 2},
+        {age: 61, year_of_operation: 59, positive_axillary_nodes: 0, survival_status: 1},
+        {age: 64, year_of_operation: 66, positive_axillary_nodes: 0, survival_status: 1}
+      ]);
+    }
+  </script>
+</head>
+<body>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum facere voluptas soluta iste possimus, dolorum aliquam alias cupiditate nostrum placeat laudantium, culpa perferendis, laboriosam omnis neque aperiam! Voluptas, necessitatibus, ipsa.</p>
+  <div id="target"></div>
+  <button onclick="getIrisData();">Iris Data</button>
+  <button onclick="getHealthData();">Health Data</button>
+  <pre id="res"></pre>
+  <script>
+    mytable.initTbl(document.getElementById("target"), {
+      onSelect: function(data) {
+        document.getElementById("res").innerText = JSON.stringify(data, undefined, 2);
+      }
+    });
+  </script>
+</body>
+</html>

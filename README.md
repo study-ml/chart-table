@@ -42,5 +42,24 @@ mytable.showDataset([
 
 ![iris](imgs/iris.png)
 
+## Change table options
+* Change colors of charts a table
+* Change height of a table
+* Once we select `2` columns and `4` rows in the table, selected data will be returned by `onSelect` callback function
 
+```javascript
+const tol_vibrant = ["#EE7733", "#0077BB", "#33BBEE", "#EE3377", "#CC3311", "#009988"];
+mytable.initTbl(document.getElementById("target"), {
+  colors: tol_vibrant,
+  minSelectedRow2Show: 4,
+  minSelectedCol2Show: 2,
+  height: 540,
+  onSelect: function(data) {
+    document.getElementById("res").innerText = JSON.stringify(data, undefined, 2);
+  }
+});
+```
+
+![health](imgs/health.png)
+![health2](imgs/health2.png)
 

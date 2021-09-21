@@ -5,6 +5,13 @@
   <meta charset="utf-8">
   <script src="../dist/charttable.min.js"></script>
   <link rel="stylesheet" href="../dist/charttable.min.css"></link>
+</head>
+<body>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum facere voluptas soluta iste possimus, dolorum aliquam alias cupiditate nostrum placeat laudantium, culpa perferendis, laboriosam omnis neque aperiam! Voluptas, necessitatibus, ipsa.</p>
+  <div id="target"></div>
+  <button onclick="getIrisData();">Iris Data</button>
+  <button onclick="getHealthData();">Health Data</button>
+  <pre id="res"></pre>
   <script>
     const mytable = charttable.table();
 
@@ -37,16 +44,13 @@
         {age: 64, year_of_operation: 66, positive_axillary_nodes: 0, survival_status: 1}
       ]);
     }
-  </script>
-</head>
-<body>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum facere voluptas soluta iste possimus, dolorum aliquam alias cupiditate nostrum placeat laudantium, culpa perferendis, laboriosam omnis neque aperiam! Voluptas, necessitatibus, ipsa.</p>
-  <div id="target"></div>
-  <button onclick="getIrisData();">Iris Data</button>
-  <button onclick="getHealthData();">Health Data</button>
-  <pre id="res"></pre>
-  <script>
+
+    const tol_vibrant = ["#EE7733", "#0077BB", "#33BBEE", "#EE3377", "#CC3311", "#009988"];
     mytable.initTbl(document.getElementById("target"), {
+      colors: tol_vibrant,
+      minSelectedRow2Show: 4,
+      minSelectedCol2Show: 2,
+      height: 540,
       onSelect: function(data) {
         document.getElementById("res").innerText = JSON.stringify(data, undefined, 2);
       }

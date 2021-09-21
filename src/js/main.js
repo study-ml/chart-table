@@ -184,13 +184,15 @@ exports.table = function() {
   function generateSvgPies(chunks, w, h, total) {
     var html = `<svg class="customChart" width="${w}" height="${h}" viewBox="0 0 32 32"><g>`;
     
-
+    const offset = 20;
     var currCount = 0;
     var i=0;
     html += `<circle r="16" cx="16" cy="16" style="fill:gray;" />`;
     Object.entries(chunks).forEach(([_,item]) => {
       dasharrayValue = ((total - currCount) / parseFloat(total)) * 100;
-      html += `<circle r="8" cx="16" cy="16" style="stroke:${gColors[i]};stroke-dasharray:calc(${dasharrayValue} * 31.42px / 62.5) ${dasharrayValue}px" class="pieChartCircle"></circle>`;
+      // console.log(`total ${total}, len: ${item.length}, curr: ${currCount}, val: ${dasharrayValue}`);
+      
+      html += `<circle r="8" cx="16" cy="16" style="stroke:${gColors[i]};stroke-dasharray:calc(${dasharrayValue} * 31.42px / 62.5) ${dasharrayValue+offset}px" class="pieChartCircle"></circle>`;
       i = i + 1;
       currCount += item.length;
     });

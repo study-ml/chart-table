@@ -46,6 +46,7 @@ exports.table = function() {
     return {
       selectedRows: selectedDataSet, 
       selectedColumns: selectedColumnNames, 
+      categoryName: gCategoryName,
     };
   }
 

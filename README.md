@@ -63,3 +63,9 @@ mytable.initTbl(document.getElementById("target"), {
 ![health](imgs/health.png)
 ![health2](imgs/health2.png)
 
+# TODO
+* use `webpack` to build
+* publish to npm and `CDN - UNPKG`
+
+
+

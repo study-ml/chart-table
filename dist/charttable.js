@@ -25,9 +25,14 @@ exports.table = function() {
     }
 
     var selectedDataSet = [];
+    // console.log(gData);
     Object.entries(gData).forEach(function(key, value) {
+      // console.log(`key:`);
+      // console.log(key);
+      // console.log("value:");
+      // console.log(value);
       if (value in gSelectedRow) {
-        selectedDataSet.push(key);
+        selectedDataSet.push(gData[value]);
       }
     });
     
@@ -185,6 +190,7 @@ exports.table = function() {
   function generateSvgPies(chunks, w, h, total) {
     var html = `<svg class="customChart" width="${w}" height="${h}" viewBox="0 0 32 32"><g>`;
     
+    const offset = 20;
     var currCount = 0;
     var i=0;
     html += `<circle r="16" cx="16" cy="16" style="fill:gray;" />`;
@@ -192,7 +198,7 @@ exports.table = function() {
       dasharrayValue = ((total - currCount) / parseFloat(total)) * 100;
       // console.log(`total ${total}, len: ${item.length}, curr: ${currCount}, val: ${dasharrayValue}`);
       
-      html += `<circle r="8" cx="16" cy="16" style="stroke:${gColors[i]};stroke-dasharray:calc(${dasharrayValue} * 31.42px / 62.5) ${dasharrayValue+20}px" class="pieChartCircle"></circle>`;
+      html += `<circle r="8" cx="16" cy="16" style="stroke:${gColors[i]};stroke-dasharray:calc(${dasharrayValue} * 31.42px / 62.5) ${dasharrayValue+offset}px" class="pieChartCircle"></circle>`;
       i = i + 1;
       currCount += item.length;
     });

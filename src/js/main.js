@@ -24,9 +24,14 @@ exports.table = function() {
     }
 
     var selectedDataSet = [];
+    // console.log(gData);
     Object.entries(gData).forEach(function(key, value) {
+      // console.log(`key:`);
+      // console.log(key);
+      // console.log("value:");
+      // console.log(value);
       if (value in gSelectedRow) {
-        selectedDataSet.push(key);
+        selectedDataSet.push(gData[value]);
       }
     });
     

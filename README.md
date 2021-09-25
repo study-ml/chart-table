@@ -42,9 +42,11 @@ mytable.showDataset([
 
 ![iris](imgs/iris.png)
 
+Take a look at `examples/hello.html` for more information
+
 ## Change table options
-* Change colors of charts a table
-* Change height of a table
+* Change colors of a chart table
+* Change height of a chart table
 * Once we select `2` columns and `4` rows in the table, selected data will be returned by `onSelect` callback function
 
 ```javascript
@@ -61,7 +63,49 @@ mytable.initTbl(document.getElementById("target"), {
 ```
 
 ![health](imgs/health.png)
-![health2](imgs/health2.png)
+
+The returned data format shown below
+```javascript
+{
+  "selectedRows": [
+    {
+      "age": 38,
+      "year_of_operation": 66,
+      "positive_axillary_nodes": 0,
+      "survival_status": 1
+    },
+    {
+      "age": 49,
+      "year_of_operation": 63,
+      "positive_axillary_nodes": 0,
+      "survival_status": 2
+    },
+    {
+      "age": 55,
+      "year_of_operation": 66,
+      "positive_axillary_nodes": 18,
+      "survival_status": 1
+    },
+    {
+      "age": 61,
+      "year_of_operation": 65,
+      "positive_axillary_nodes": 0,
+      "survival_status": 2
+    }
+  ],
+  "selectedColumns": [
+    "year_of_operation",
+    "positive_axillary_nodes"
+  ],
+  "selectedColorMap": {
+    "1": "#EE7733",
+    "2": "#0077BB"
+  },
+  "categoryName": "survival_status"
+}
+```
+
+Take a look at `examples/options.html` for more information
 
 # TODO
 * use `webpack` to build

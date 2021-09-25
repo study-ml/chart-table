@@ -1,4 +1,5 @@
 exports.table = function() {
+  var gEle = null;
   var gData = null;
   var gCategoryName = null;
   var gColumnTypes = null;
@@ -259,6 +260,18 @@ exports.table = function() {
     }
   }
 
+  function resetTbl() {
+    gData = null;
+    gCategoryName = null;
+    gColumnTypes = null;
+    gSelectedCol = {};
+    gSelectedRow = {};
+
+    gEle.replaceChildren();
+    // gEle.appendChild(buildTable());
+    gEle.innerHTML = buildTable();
+  }
+
   let publicScope = {};
   publicScope.initTbl = function(ele, options) {
     var extend = function(a, b){
@@ -285,11 +298,14 @@ exports.table = function() {
     gMinSelectedCol2Show = options.minSelectedCol2Show;
     gOnSelect = options.onSelect;
     gHeight = options.height;
+    gEle = ele;
 
-    ele.innerHTML = buildTable();
+    resetTbl();
   }
 
   publicScope.showDataset = function(data) {
+    resetTbl();
+
     gData = data;
 
     var thead = document.querySelector('.tableFixHead > table > thead');

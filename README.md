@@ -42,7 +42,7 @@ mytable.showDataset([
 
 ![iris](imgs/iris.png)
 
-Take a look at `examples/hello.html` for more information
+Take a look at [examples/hello.html](https://github.com/study-ml/chart-table/blob/master/examples/hello.html) for more information
 
 ## Change table options
 * Change colors of a chart table
@@ -69,8 +69,8 @@ The returned data format shown below
 {
   "selectedRows": [
     {
-      "age": 38,
-      "year_of_operation": 66,
+      "age": 30,
+      "year_of_operation": 65,
       "positive_axillary_nodes": 0,
       "survival_status": 1
     },
@@ -105,7 +105,7 @@ The returned data format shown below
 }
 ```
 
-Take a look at `examples/options.html` for more information
+Take a look at [examples/options.html](https://github.com/study-ml/chart-table/blob/master/examples/options.html) for more information
 
 # TODO
 * use `webpack` to build

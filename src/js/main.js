@@ -5,6 +5,7 @@ exports.table = function() {
   var gColumnTypes = null;
   var gSelectedCol = {};
   var gSelectedRow = {};
+  var gColorMap = {};
   var gColors = null;
   var gMinSelectedRow2Show = null;
   var gMinSelectedCol2Show = null;
@@ -33,6 +34,7 @@ exports.table = function() {
       // console.log(value);
       if (value in gSelectedRow) {
         selectedDataSet.push(gData[value]);
+        // console.log(gData[value][gCategoryName]);
       }
     });
     
@@ -47,6 +49,7 @@ exports.table = function() {
     return {
       selectedRows: selectedDataSet, 
       selectedColumns: selectedColumnNames, 
+      selectedColorMap: gColorMap,
       categoryName: gCategoryName,
     };
   }
@@ -140,15 +143,15 @@ exports.table = function() {
       rect.setAttribute('y', y);
       rect.setAttribute('height', height);
       rect.addEventListener('mousemove', function() {
-        console.log("move!!");
+        // console.log("move!!");
         barMouseMove(xBase+x, y-margin+yBase, content);
       });
       rect.addEventListener('mouseover', function() {
-        console.log("over!!");
+        // console.log("over!!");
         barMouseOver();
       });
       rect.addEventListener('mouseout', function() {
-        console.log("out!!");
+        // console.log("out!!");
         barMouseOut();
       });
       g.appendChild(rect);
@@ -195,11 +198,13 @@ exports.table = function() {
     var currCount = 0;
     var i=0;
     html += `<circle r="16" cx="16" cy="16" style="fill:gray;" />`;
-    Object.entries(chunks).forEach(([_,item]) => {
+    Object.entries(chunks).forEach(([key,item]) => {
       dasharrayValue = ((total - currCount) / parseFloat(total)) * 100;
       // console.log(`total ${total}, len: ${item.length}, curr: ${currCount}, val: ${dasharrayValue}`);
       
       html += `<circle r="8" cx="16" cy="16" style="stroke:${gColors[i]};stroke-dasharray:calc(${dasharrayValue} * 31.42px / 62.5) ${dasharrayValue+offset}px" class="pieChartCircle"></circle>`;
+      gColorMap[key] = gColors[i];
+      
       i = i + 1;
       currCount += item.length;
     });
@@ -266,6 +271,7 @@ exports.table = function() {
     gColumnTypes = null;
     gSelectedCol = {};
     gSelectedRow = {};
+    gColorMap = {};
 
     gEle.replaceChildren();
     // gEle.appendChild(buildTable());

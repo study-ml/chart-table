@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Load Csv into Chart Table</title>
+  <meta charset="utf-8">
+  <script src="../dist/charttable.min.js"></script>
+  <link rel="stylesheet" href="../dist/charttable.min.css"></link>
+  <script>
+  </script>
+</head>
+<body>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum facere voluptas soluta iste possimus, dolorum aliquam alias cupiditate nostrum placeat laudantium, culpa perferendis, laboriosam omnis neque aperiam! Voluptas, necessitatibus, ipsa.</p>
+  <label for="uploadFile">Upload your csv: </label>
+  <input type="file" id="uploadFile" accept=".csv" onchange="uploadCsv();"/>
+  <hr>
+  <div id="target"></div>
+  <script>
+    async function ReadFile(file) {
+      return await file.text()
+    }
+
+    function csv2js(csv) {
+      const lines = csv.split("\n");
+      var result = [];
+      const headers = lines[0].split(",");
+      
+      for (var i=1; i<lines.length; i++) {
+        if (lines[i] == "") {
+          continue;
+        }
+
+        var obj = {};
+        var currentline = lines[i].split(",");
+        
+        for (var j=0;j<headers.length;j++) {
+          const key = headers[j].replace(/"/g,"");
+          const value = parseFloat(currentline[j]);
+          if (isNaN(value)) {
+            obj[key] = currentline[j].replace(/"/g,"");
+          } else {
+            obj[key] = value;
+          }
+        }
+        result.push(obj);
+      }
+
+      return result;
+    }
+
+    function uploadCsv() {
+      const inputValue = document.getElementById("uploadFile").value;
+      if (inputValue === "") {
+        return;
+      }
+
+      const selectedFile = document.getElementById('uploadFile').files[0];
+      const promise = new Promise(resolve => {
+        const fileContent = ReadFile(selectedFile);
+        resolve(fileContent);
+      });
+
+      promise.then(fileContent => {
+        const obj = csv2js(fileContent);
+        mytable.showDataset(obj);
+      });
+    }
+
+    const mytable = charttable.table();
+    const tol_vibrant = ["#EE7733", "#0077BB", "#33BBEE", "#EE3377", "#CC3311", "#009988"];
+    mytable.initTbl(document.getElementById("target"), {
+      colors: tol_vibrant,
+      minSelectedRow2Show: 4,
+      minSelectedCol2Show: 2
+    });
+  </script>
+</body>
+</html>
+
+
+
+

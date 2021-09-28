@@ -13,8 +13,6 @@
   <button onclick="getHealthData();">Health Data</button>
   <pre id="res"></pre>
   <script>
-    const mytable = charttable.table();
-
     function getIrisData() {
       mytable.showDataset([
         {sepal_length: 5.1, sepal_width: 3.5, petal_length: 1.4, petal_width: 0.2, species: 'Setosa'},
@@ -45,6 +43,7 @@
       ]);
     }
 
+    const mytable = charttable.table();
     const tol_vibrant = ["#EE7733", "#0077BB", "#33BBEE", "#EE3377", "#CC3311", "#009988"];
     mytable.initTbl(document.getElementById("target"), {
       colors: tol_vibrant,

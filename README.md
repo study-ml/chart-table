@@ -1,5 +1,6 @@
 # chart-table
-Clickable table with charts in thead tag. 
+* Clickable table with charts in thead tag
+* The selected data (e.g., rows and columns) will be returned once we meet the criteria
 
 # Setup
 

@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": ["dist/*.js", "dist/*.css"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/study-ml/chart-table.git"

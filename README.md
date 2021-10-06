@@ -12,7 +12,10 @@ Include the library
 ```
 
 ## CDN - UNPKG
-* TODO
+```html
+<script type="text/javascript" src="https://unpkg.com/chart-table@1.0.1/dist/charttable.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/chart-table@1.0.1/dist/charttable.min.css" />  
+```
 
 # Usage
 ## Hello World example
@@ -110,7 +113,4 @@ Take a look at [examples/options.html](https://github.com/study-ml/chart-table/b
 
 # TODO
 * use `webpack` to build
-* publish to npm and `CDN - UNPKG`
-
-
 

@@ -13,8 +13,8 @@ Include the library
 
 ## CDN - UNPKG
 ```html
-<script type="text/javascript" src="https://unpkg.com/chart-table@1.0.1/dist/charttable.min.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/chart-table@1.0.1/dist/charttable.min.css" />  
+<script type="text/javascript" src="https://unpkg.com/chart-table@1.0.3/dist/charttable.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/chart-table@1.0.3/dist/charttable.min.css" />  
 ```
 
 # Usage

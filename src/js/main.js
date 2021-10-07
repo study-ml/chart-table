@@ -1,7 +1,7 @@
 exports.table = function() {
   var gEle = null;
   var gData = null;
-  var gCategoryName = null;
+  var gCategoryName = "";
   var gColumnTypes = null;
   var gSelectedCol = {};
   var gSelectedRow = {};
@@ -275,14 +275,15 @@ exports.table = function() {
     }
   }
 
-  function resetTbl() {
-    gData = null;
-    gCategoryName = null;
-    gColumnTypes = null;
+  function resetTbl(data, categoryName) {
+    gData = data;
     gSelectedCol = {};
     gSelectedRow = {};
-    gColorMap = {};
 
+    if (categoryName == "") {
+      gCategoryName = Object.keys(data[0])[Object.keys(data[0]).length-1];
+    }
+    
     gEle.replaceChildren();
     // gEle.appendChild(buildTable());
     gEle.innerHTML = buildTable();
@@ -290,6 +291,22 @@ exports.table = function() {
 
   function getDistinctValue(jsonArr, columnName) {
     return jsonArr.map(x => x[columnName]).filter((value, idx, self)=>{return self.indexOf(value)===idx}).length;
+  }
+
+  function validData(data) {
+    if (data == null) {
+      return false;
+    }
+
+    if (!Array.isArray(data)) {
+      return false;
+    }
+
+    if (data.length < 1) {
+      return false;
+    }
+
+    return true;
   }
 
   let publicScope = {};
@@ -319,29 +336,34 @@ exports.table = function() {
     gOnSelect = options.onSelect;
     gHeight = options.height;
     gEle = ele;
-
-    resetTbl();
   }
 
-  publicScope.showDataset = function(data) {
-    resetTbl();
+  publicScope.showDataset = function(data, categoryName="") {
+    if (!validData(data)) {
+      return;
+    }
 
-    gData = data;
+    resetTbl(data, categoryName);
 
     var thead = document.querySelector('.tableFixHead > table > thead');
     emptyChild(thead);
 
-    const numberOfColumns = Object.keys(data[0]).length;
     var i = 0;
     var tr = document.createElement("tr");
     Object.entries(data[0]).forEach(([key, value]) => {
-      if (i == numberOfColumns-1) {
-        gCategoryName = key;
-        tr.append(createElementHelper("th", createSvgPieChart(key, data)));
-      } else if (isNaN(value) && getDistinctValue(data, key) < 6) {
-        tr.append(createElementHelper("th", createSvgPieChart(key, data), key));
-      } else if (isNaN(value) && getDistinctValue(data, key) >= 6) {
-        tr.append(createElementHelper("th", createNumerChart(key, data), key));
+      const distinctValues = getDistinctValue(data, key);
+      if (gCategoryName == key) {
+        if (distinctValues < 6) {
+          tr.append(createElementHelper("th", createSvgPieChart(key, data)));
+        } else {
+          tr.append(createElementHelper("th", createNumerChart(key, data)));
+        }
+      } else if (isNaN(value)) {
+        if (distinctValues < 6) {
+          tr.append(createElementHelper("th", createSvgPieChart(key, data), key));
+        } else {
+          tr.append(createElementHelper("th", createNumerChart(key, data), key));
+        }
       } else {
         tr.append(createElementHelper("th", createSvgBarChart(key, data, 10.0, i), key));
       }

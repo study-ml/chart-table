@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Classification with Chart Table</title>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="../dist/charttable.min.js"></script>
+  <link rel="stylesheet" href="../dist/charttable.min.css"></link>
+</head>
+<body>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum facere voluptas soluta iste possimus, dolorum aliquam alias cupiditate nostrum placeat laudantium, culpa perferendis, laboriosam omnis neque aperiam! Voluptas, necessitatibus, ipsa.</p>
+  <div id="mytable"></div>
+  <script>
+    const mytable = charttable.table();
+    const tol_vibrant = ["#EE7733", "#0077BB", "#33BBEE", "#EE3377", "#CC3311", "#009988"];
+    mytable.initTbl(document.getElementById("mytable"), {
+      colors: tol_vibrant,
+      minSelectedRow2Show: 4,
+      minSelectedCol2Show: 3,
+      height: 460
+    });
+
+    mytable.showDataset([
+      { "company": "Berkshire", "revenue": "242137", "country": "US" },
+      { "company": "Mitsubishi", "revenue": "68301.4", "country": "Japan" },
+      { "company": "Marubeni", "revenue": "68057.2", "country": "Japan" },
+      { "company": "SMFG", "revenue": "52026", "country": "Japan" },
+      { "company": "Facebook", "revenue": "40653", "country": "US" },
+      { "company": "Amazon", "revenue": "177866", "country": "US" },
+      { "company": "Tencent", "revenue": "35178.8", "country": "China" },
+      { "company": "Alibaba", "revenue": "37770.8", "country": "China" },
+      { "company": "Apple", "revenue": "229234", "country": "US" }
+    ]);
+  </script>
+</body>
+</html>

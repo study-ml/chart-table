@@ -214,6 +214,16 @@ exports.table = function() {
     return html;
   }
 
+  function createNumerChart(title, data) {
+    var res = 
+      `<div><b>${title}</b></div>
+      <br>
+      <div style="font-size: 36px; color: ${gColors[0]}"><b>${getDistinctValue(data, title)}</b></div>
+      <div>Distinct Value</div>`;
+
+    return res;
+  }
+
   function createSvgPieChart(title, data) {
     const row = data.map(x => x[title]);
     const chunks = row.reduce((total, curr) => {
@@ -278,6 +288,10 @@ exports.table = function() {
     gEle.innerHTML = buildTable();
   }
 
+  function getDistinctValue(jsonArr, columnName) {
+    return jsonArr.map(x => x[columnName]).filter((value, idx, self)=>{return self.indexOf(value)===idx}).length;
+  }
+
   let publicScope = {};
   publicScope.initTbl = function(ele, options) {
     var extend = function(a, b){
@@ -324,8 +338,10 @@ exports.table = function() {
       if (i == numberOfColumns-1) {
         gCategoryName = key;
         tr.append(createElementHelper("th", createSvgPieChart(key, data)));
-      } else if (isNaN(value)) {
+      } else if (isNaN(value) && getDistinctValue(data, key) < 6) {
         tr.append(createElementHelper("th", createSvgPieChart(key, data), key));
+      } else if (isNaN(value) && getDistinctValue(data, key) >= 6) {
+        tr.append(createElementHelper("th", createNumerChart(key, data), key));
       } else {
         tr.append(createElementHelper("th", createSvgBarChart(key, data, 10.0, i), key));
       }
